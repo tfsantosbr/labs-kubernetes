@@ -7,11 +7,12 @@
   - [x] Criar services para os pods
   - [x] Acessar os pods via port-foward
 
-- [ ] INGRESS CONTROLLER
+- [x] INGRESS CONTROLLER
 
   - [x] Configurar ingress
   - [x] Configurar https no ingress
-  - [ ] Configurar Ingress para fazer redirect do HTTP para o HTTPS
+  - [x] Configurar Ingress para fazer redirect do HTTP para o HTTPS
+    - O redirect é feito automaticamente
 
 - [ ] GATEWAY API
   - [ ] GATEWAY INGRESS CONTROLLER

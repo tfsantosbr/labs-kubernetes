@@ -2,10 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-v1-ingress
-  namespace: nginx-ingress-controller
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: ca-cluster-issuer
+  namespace: nginx-ingress-controller-ns
 spec:
   ingressClassName: nginx
   rules:
@@ -22,4 +19,4 @@ spec:
   tls:
     - hosts:
         - app1.example.local
-      secretName: ingress-cert
+      secretName: certificate-secret

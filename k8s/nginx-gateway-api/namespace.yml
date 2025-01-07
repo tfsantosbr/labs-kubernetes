@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: orders-ns
+  name: nginx-gateway-api-ns

@@ -2,14 +2,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: orders-v1-tls-redirect
-  namespace: orders-ns
+  name: app-v2-tls-redirect
+  namespace: nginx-gateway-api-ns
 spec:
   parentRefs:
-    - name: orders-gateway
+    - name: app-gateway
       sectionName: http
   hostnames:
-    - webapp1.example.local
+    - app2.example.local
   rules:
     - filters:
         - type: RequestRedirect
@@ -21,19 +21,19 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: orders-v1-http-route
-  namespace: orders-ns
+  name: app-v2-http-route
+  namespace: nginx-gateway-api-ns
 spec:
   parentRefs:
-    - name: orders-gateway
+    - name: app-gateway
       sectionName: https
   hostnames:
-    - webapp1.example.local
+    - app2.example.local
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: orders-webapp-v1-service
+        - name: app-v2-service
           port: 80

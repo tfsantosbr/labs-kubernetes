@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: orders-gateway
-  namespace: orders-ns
+  name: app-gateway
+  namespace: nginx-gateway-api-ns
 spec:
   gatewayClassName: nginx
   listeners:
@@ -18,4 +18,3 @@ spec:
         certificateRefs:
           - kind: Secret
             name: certificate-secret
-            namespace: certificate

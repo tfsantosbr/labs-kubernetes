@@ -43,3 +43,7 @@ curl http://app2.example.local # 301 Moved Permanently
 ```bash
 kubectl delete ns nginx-ingress-controller-ns
 ```
+
+## Uninstall NGINX Ingress Controller
+
+Follow this [Uninstallation Guide](https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-manifests/#uninstall-nginx-ingress-controller) to uninstall NGINX Ingress Controller

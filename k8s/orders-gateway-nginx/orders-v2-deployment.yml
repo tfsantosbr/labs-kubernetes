@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-v2
-  namespace: webapp-namespace
+  name: orders-webapp-v2
+  namespace: orders-ns
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapp
+      app: orders-webapp
       version: v2
   template:
     metadata:
       labels:
-        app: webapp
+        app: orders-webapp
         version: v2
     spec:
       containers:
-        - name: webapp-v2
+        - name: orders-webapp-v2
           image: nginx:alpine
           ports:
             - containerPort: 80
           command: ["/bin/sh", "-c"]
           args:
-            - echo "webapp v2" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
+            - echo "orders-webapp v2" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
           resources:
             requests:
               memory: "64Mi"
@@ -34,13 +34,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapp-v2-service
-  namespace: webapp-namespace
+  name: orders-webapp-v2-service
+  namespace: orders-ns
 spec:
   ports:
     - name: http
       port: 80
       targetPort: 80
   selector:
-    app: webapp
+    app: orders-webapp
     version: v2

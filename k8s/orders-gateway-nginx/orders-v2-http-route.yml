@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: orders-v2-http-route
+  namespace: orders-ns
+spec:
+  parentRefs:
+    - name: orders-gateway
+  hostnames:
+    - webapp2.example.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: orders-webapp-v2-service
+          port: 80

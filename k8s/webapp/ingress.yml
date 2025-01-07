@@ -5,6 +5,7 @@ metadata:
   namespace: webapp-namespace
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: ca-cluster-issuer
 spec:
   ingressClassName: nginx
   rules:
@@ -28,3 +29,8 @@ spec:
                 name: webapp-v2-service
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - webapp1.example.local
+        - webapp2.example.local
+      secretName: ingress-cert

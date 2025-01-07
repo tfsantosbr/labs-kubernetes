@@ -11,3 +11,8 @@ kubectl get all -n webapp-namespace
 kubectl port-forward service/webapp-v1-service 8080:80 -n webapp-namespace
 kubectl port-forward service/webapp-v2-service 8080:80 -n webapp-namespace
 ```
+
+```bash
+curl -k https://webapp1.example.local
+curl -k https://webapp2.example.local
+```

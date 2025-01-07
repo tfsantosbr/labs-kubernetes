@@ -15,8 +15,8 @@
     - O redirect é feito automaticamente
 
 - [ ] GATEWAY API
-  - [ ] GATEWAY INGRESS CONTROLLER
-    - [x] Instalei Gateway API (NGINX Controller)
+  - [x] NGINX GATEWAY API
+    - [x] Instalar NGINX Gateway API
     - [x] Configurar o Gateway
     - [x] Configurar os HTTPRoutes para as applicações v1 e v2
     - [x] Configurei o TLS para tráfegos HTTPs no Gateway e HttpRoutes

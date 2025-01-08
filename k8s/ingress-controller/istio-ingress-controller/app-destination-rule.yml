@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: app-destination-rule
+  namespace: istio-ingress-controller-ns
+spec:
+  host: app
+  subsets:
+    - name: v1
+      labels:
+        app: app
+        version: v1
+    - name: v2
+      labels:
+        app: app
+        version: v2

@@ -1,10 +1,10 @@
-# NGINX GATEWAY API
+# ISTIO GATEWAY API
 
 ## Installation
 
-Follow this [Installation Guide](#) to install NGINX gateway API before running the next commands.
+Follow this [Installation Guide](https://istio.io/latest/docs/tasks/traffic-management/ingress/gateway-api) to install Istio gateway API before running the next commands.
 
-## Configure NGINX Gateway API for Applications
+## Configure Istio Gateway API for Applications
 
 ```bash
 kubectl apply -f k8s/istio-gateway-api/namespace.yml
@@ -33,12 +33,58 @@ curl http://app1.example.local -v # 301 Moved Permanently
 curl http://app2.example.local -v # 301 Moved Permanently
 ```
 
+## Canary Deploy Strategy
+
+Run the following command in separate terminal to see results in real time:
+
+```bash
+while true; do curl -k https://app.example.local; sleep 1; done
+```
+
+Modify the properties `weight` of file [app-canary-http-route.yml](./app-canary-http-route.yml) between 0 and 100, and see te traffic routing to service with greattest weight
+
+```yml
+# app-canary-http-route.yml
+backendRefs:
+  - name: app-v1-service
+    weight: 20 # modify to change the weight for app-v1-service traffic
+  - name: app-v2-service
+    weight: 80 # modify to change the weight for app-v2-service traffic
+```
+
+## A/B Test Deploy Strategy
+
+The [app-abtest-http-route.yml](./app-abtest-http-route.yml) has the rules for A/B test deploy strategy. The rule is configured to allow requests to app-v2-service when Header `group: beta-test-users` is present.
+
+```yml
+rules:
+  - backendRefs:
+      # if no specific header is present, default traffic send to app-v1-service
+      - name: app-v1-service
+        port: 80
+  - matches:
+      # send traffic to app-v2-service, when header 'group: beta-test-users' is present
+      - headers:
+          - name: group
+            value: beta-test-users
+    backendRefs:
+      - name: app-v2-service
+        port: 80
+```
+
+For test this rule, you can run these following commands:
+
+```yml
+curl -k https://www.example.local # APP v1 (default traffic)
+curl -k -H "group: beta-test-users" https://www.example.local # APP v2 (header match rule traffic)
+```
+
 ## Remove Application Resources
 
 ```bash
-
+kubectl delete ns istio-gateway-api-ns
 ```
 
-## Uninstall NGINX Gateway API
+## Uninstall Istio Gateway API
 
-Follow this [Uninstallation Guide](#) to uninstall NGINX gateway API
+Follow this [Uninstallation Guide](https://istio.io/latest/docs/tasks/traffic-management/ingress/gateway-api/#cleanup) to uninstall Istio gateway API

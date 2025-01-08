@@ -8,8 +8,8 @@ to install NGINX Ingress Controller before running the next commands.
 ## Configure NGINX Ingress for Applications
 
 ```bash
-kubectl apply -f k8s/nginx-ingress-controller/namespace.yml
-kubectl apply -f k8s/nginx-ingress-controller
+kubectl apply -f k8s/ingress-controller/nginx-ingress-controller/namespace.yml
+kubectl apply -f k8s/ingress-controller/nginx-ingress-controller
 ```
 
 Check if the resources are up:
@@ -19,7 +19,7 @@ Check if the resources are up:
 kubectl get svc nginx-ingress -n nginx-ingress
 
 # Checking the application resources
-kubectl get all,ingress,secrets -n nginx-ingress-controller-ns
+kubectl get pod,deploy,svc,ingress,secrets -n nginx-ingress-controller-ns
 ```
 
 ## Testing Applications
@@ -41,7 +41,7 @@ curl http://app2.example.local # 301 Moved Permanently
 ## Remove Application Resources
 
 ```bash
-kubectl delete ns nginx-ingress-controller-ns
+kubectl delete -f k8s/ingress-controller/nginx-ingress-controller
 ```
 
 ## Uninstall NGINX Ingress Controller

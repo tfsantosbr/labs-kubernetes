@@ -38,7 +38,7 @@ curl http://app2.example.local -v # 302 Moved Permanently
 Run the following command in separate terminal to see results in real time:
 
 ```bash
-while true; do curl -k https://app.example.local; sleep 1; done
+while true; do curl -k https://app.canary.example.local; sleep 1; done
 ```
 
 Modify the properties `weight` of file [app-canary-http-route.yml](./app-canary-http-route.yml) between 0 and 100, and see te traffic routing to service with greattest weight
@@ -75,8 +75,8 @@ rules:
 For test this rule, you can run these following commands:
 
 ```bash
-curl -k https://www.example.local # APP v1 (default traffic)
-curl -k -H "group: beta-test-users" https://www.example.local # APP v2 (header match rule traffic)
+curl -k https://app.example.local # APP v1 (default traffic)
+curl -k -H "group: beta-test-users" https://app.example.local # APP v2 (header match rule traffic)
 ```
 
 ## Blue/Green Deploy Strategy

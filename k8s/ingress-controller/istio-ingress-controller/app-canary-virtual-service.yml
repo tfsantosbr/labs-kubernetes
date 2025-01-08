@@ -1,11 +1,11 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: app-v1-virtual-service
+  name: app-canary-virtual-service
   namespace: istio-ingress-controller-ns
 spec:
   hosts:
-    - app1.example.local
+    - app.canary.example.local
   gateways:
     - istio-ingress-gateway
   http:
@@ -13,19 +13,8 @@ spec:
         - destination:
             host: app-service
             subset: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: app-v2-virtual-service
-  namespace: istio-ingress-controller-ns
-spec:
-  hosts:
-    - app2.example.local
-  gateways:
-    - istio-ingress-gateway
-  http:
-    - route:
+          weight: 50
         - destination:
             host: app-service
             subset: v2
+          weight: 50

@@ -8,7 +8,7 @@ spec:
     - name: app-gateway
       sectionName: https
   hostnames:
-    - www.example.local
+    - app.example.local
   rules:
     - backendRefs:
         - name: app-v1-service

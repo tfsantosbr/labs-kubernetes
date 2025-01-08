@@ -29,8 +29,8 @@ curl -k https://app2.example.local # APP v2
 Testing HTTP redirection to HTTPs:
 
 ```bash
-curl http://app1.example.local -v # 301 Moved Permanently
-curl http://app2.example.local -v # 301 Moved Permanently
+curl http://app1.example.local -v # 302 Moved Permanently
+curl http://app2.example.local -v # 302 Moved Permanently
 ```
 
 ## Canary Deploy Strategy

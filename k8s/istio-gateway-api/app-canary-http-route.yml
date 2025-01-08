@@ -17,7 +17,7 @@ spec:
       backendRefs:
         - name: app-v1-service
           port: 80
-          weight: 20
+          weight: 50
         - name: app-v2-service
           port: 80
-          weight: 80
+          weight: 50

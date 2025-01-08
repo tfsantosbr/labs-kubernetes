@@ -47,9 +47,9 @@ Modify the properties `weight` of file [app-canary-http-route.yml](./app-canary-
 # app-canary-http-route.yml
 backendRefs:
   - name: app-v1-service
-    weight: 20 # modify to change the weight for app-v1-service traffic
+    weight: 50 # modify to change the weight for app-v1-service traffic
   - name: app-v2-service
-    weight: 80 # modify to change the weight for app-v2-service traffic
+    weight: 50 # modify to change the weight for app-v2-service traffic
 ```
 
 ## A/B Test Deploy Strategy

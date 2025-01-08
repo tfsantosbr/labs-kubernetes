@@ -46,35 +46,40 @@ Run the following command in separate terminal to see results in real time:
 while true; do curl -k https://app.canary.example.local; sleep 1; done
 ```
 
-Modify the properties `weight` of file [app-canary-http-route.yml](./app-canary-http-route.yml) between 0 and 100, and see te traffic routing to service with greattest weight
+Modify the properties `weight` of file [app-canary-virtual-service.yml](./app-canary-virtual-service.yml) between 0 and 100, and see te traffic routing to service with greattest weight
 
 ```yml
-# app-canary-http-route.yml
-backendRefs:
-  - name: app-v1-service
-    weight: 50 # modify to change the weight for app-v1-service traffic
-  - name: app-v2-service
-    weight: 50 # modify to change the weight for app-v2-service traffic
+- route:
+    - destination:
+        host: app-service
+        subset: v1
+      weight: 50 # modify to change the weight for app v1 traffic
+    - destination:
+        host: app-service
+        subset: v2
+      weight: 50 # modify to change the weight for app v2 traffic
 ```
 
 ## A/B Test Deploy Strategy
 
-The [app-abtest-http-route.yml](./app-abtest-http-route.yml) has the rules for A/B test deploy strategy. The rule is configured to allow requests to app-v2-service when Header `group: beta-test-users` is present.
+The [app-abtest-virtual-service.yml](./app-abtest-virtual-service.yml) has the rules for A/B test deploy strategy. The rule is configured to allow requests to app-v2-service when Header `group: beta-test-users` is present.
 
 ```yml
-rules:
-  - backendRefs:
-      # if no specific header is present, default traffic send to app-v1-service
-      - name: app-v1-service
-        port: 80
-  - matches:
-      # send traffic to app-v2-service, when header 'group: beta-test-users' is present
+http:
+  # send traffic to app-v2-service, when header 'group: beta-test-users' is present
+  - match:
       - headers:
-          - name: group
-            value: beta-test-users
-    backendRefs:
-      - name: app-v2-service
-        port: 80
+          group:
+            exact: beta-test-users
+    route:
+      - destination:
+          host: app-service
+          subset: v2
+    # if no specific header is present, default traffic send to app-v1-service
+  - route:
+      - destination:
+          host: app-service
+          subset: v1
 ```
 
 For test this rule, you can run these following commands:
@@ -86,22 +91,26 @@ curl -k -H "group: beta-test-users" https://app.example.local # APP v2 (header m
 
 ## Blue/Green Deploy Strategy
 
-The [app-blue-green-http-route.yml](./app-blue-green-http-route.yml) has the rules for Blue/Green deploy strategy. The rule is based on host and when users access the `https://app.blue.example.local` URL, the traffic is routed to `app-v1-service` and when users access the `https://app.green.example.local` URL, the traffic is routed to `app-v2-service`.
+The [app-blue-green-virtual-service.yml](./app-blue-green-virtual-service.yml) has the rules for Blue/Green deploy strategy. The rule is based on host and when users access the `https://app.blue.example.local` URL, the traffic is routed to `app-v1-service` and when users access the `https://app.green.example.local` URL, the traffic is routed to `app-v2-service`.
 
 ```yml
-hostnames:
-  - app.blue.example.local
-rules:
-  backendRefs:
-    - name: app-v1-service
-      port: 80
+spec:
+  hosts:
+    - app.blue.example.local
+  http:
+    - route:
+        - destination:
+            host: app-service
+            subset: v1
 ---
-hostnames:
-  - app.green.example.local
-rules:
-  backendRefs:
-    - name: app-v2-service
-      port: 80
+spec:
+  hosts:
+    - app.green.example.local
+  http:
+    - route:
+        - destination:
+            host: app-service
+            subset: v2
 ```
 
 To test this rule, you can run these following commands:

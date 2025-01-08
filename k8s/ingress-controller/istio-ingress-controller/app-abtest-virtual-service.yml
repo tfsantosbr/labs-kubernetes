@@ -1,20 +1,23 @@
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: app-canary-virtual-service
+  name: webapi-abtest
   namespace: istio-ingress-controller-ns
 spec:
   hosts:
-    - app.canary.example.local
+    - app.example.local
   gateways:
     - istio-ingress-gateway
   http:
+    - match:
+        - headers:
+            group:
+              exact: beta-test-users
+      route:
+        - destination:
+            host: app-service
+            subset: v2
     - route:
         - destination:
             host: app-service
             subset: v1
-          weight: 50
-        - destination:
-            host: app-service
-            subset: v2
-          weight: 50

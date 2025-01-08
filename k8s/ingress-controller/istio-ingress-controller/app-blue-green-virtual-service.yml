@@ -1,11 +1,11 @@
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: app-v1-virtual-service
+  name: app-blue-virtual-service
   namespace: istio-ingress-controller-ns
 spec:
   hosts:
-    - app1.example.local
+    - app.blue.example.local
   gateways:
     - istio-ingress-gateway
   http:
@@ -17,11 +17,11 @@ spec:
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: app-v2-virtual-service
+  name: app-green-virtual-service
   namespace: istio-ingress-controller-ns
 spec:
   hosts:
-    - app2.example.local
+    - app.green.example.local
   gateways:
     - istio-ingress-gateway
   http:

@@ -11,15 +11,15 @@
 
   - [x] NGINX INGRESS CONTROLLER
 
-    - [x] Configurar NGINX Ingress Controller
-    - [x] Configurar https no ingress
-    - [x] Configurar Ingress para fazer redirect do HTTP para o HTTPS
-      - O redirect é feito automaticamente
+    - [x] Instalar o NGINX Ingress Controller
+    - [x] Configurar TLS (com redirect de HTTP para HTTPS)
+    - [ ] Configurar Ingress para estratégia de deploy Canário
+    - [ ] Configurar Ingress para estratégia de deploy Blue/Green
+    - [ ] Configurar Ingress para estratégia de deploy A/B Test
 
   - [ ] ISTIO INGRESS CONTROLLER
-    - [ ] Instalar o ISTIO Ingress Controller
-    - [ ] Configurar https no ingress
-    - [ ] Configurar Ingress para fazer redirect do HTTP para o HTTPS
+    - [ ] Instalar o Istio Ingress Controller
+    - [ ] Configurar TLS (com redirect de HTTP para HTTPS)
     - [ ] Configurar Ingress para estratégia de deploy Canário
     - [ ] Configurar Ingress para estratégia de deploy Blue/Green
     - [ ] Configurar Ingress para estratégia de deploy A/B Test

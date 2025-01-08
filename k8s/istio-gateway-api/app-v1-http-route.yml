@@ -1,0 +1,39 @@
+# HTPPRoute para redirecionar o tráfego HTTP para HTTPS
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-v1-tls-redirect
+  namespace: istio-gateway-api-ns
+spec:
+  parentRefs:
+    - name: app-gateway
+      sectionName: http
+  hostnames:
+    - app1.example.local
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            port: 443
+---
+# HTPPRoute para rotear o tráfego HTTPS
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-v1-http-route
+  namespace: istio-gateway-api-ns
+spec:
+  parentRefs:
+    - name: app-gateway
+      sectionName: https
+  hostnames:
+    - app1.example.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: app-v1-service
+          port: 80

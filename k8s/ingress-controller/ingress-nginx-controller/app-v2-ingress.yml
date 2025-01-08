@@ -1,22 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-v1-ingress
-  namespace: nginx-ingress-controller-ns
+  name: app-v2-ingress
+  namespace: ingress-nginx-controller-ns
 spec:
   ingressClassName: nginx
   rules:
-    - host: app1.example.local
+    - host: app2.example.local
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: app-v1-service
+                name: app-v2-service
                 port:
                   number: 80
   tls:
     - hosts:
-        - app1.example.local
+        - app2.example.local
       secretName: certificate-secret

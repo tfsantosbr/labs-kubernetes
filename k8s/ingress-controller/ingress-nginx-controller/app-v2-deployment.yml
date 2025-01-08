@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-v1
-  namespace: nginx-ingress-controller-ns
+  name: app-v2
+  namespace: ingress-nginx-controller-ns
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: app
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: app
-        version: v1
+        version: v2
     spec:
       containers:
-        - name: app-v1
+        - name: app-v2
           image: nginx:alpine
           ports:
             - containerPort: 80
           command: ["/bin/sh", "-c"]
           args:
-            - echo "APP v1" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
+            - echo "APP v2" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
           resources:
             requests:
               memory: "64Mi"
@@ -34,8 +34,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-v1-service
-  namespace: nginx-ingress-controller-ns
+  name: app-v2-service
+  namespace: ingress-nginx-controller-ns
 spec:
   ports:
     - name: http
@@ -43,4 +43,4 @@ spec:
       targetPort: 80
   selector:
     app: app
-    version: v1
+    version: v2

@@ -18,7 +18,7 @@
     - [ ] Configurar Ingress para estratégia de deploy A/B Test
 
   - [ ] ISTIO INGRESS CONTROLLER
-    - [ ] Instalar o Istio Ingress Controller
+    - [x] Instalar o Istio Ingress Controller
     - [ ] Configurar TLS (com redirect de HTTP para HTTPS)
     - [ ] Configurar Ingress para estratégia de deploy Canário
     - [ ] Configurar Ingress para estratégia de deploy Blue/Green

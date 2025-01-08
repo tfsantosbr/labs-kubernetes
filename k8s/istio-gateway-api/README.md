@@ -72,6 +72,13 @@ rules:
         port: 80
 ```
 
+For test this rule, you can run these following commands:
+
+```bash
+curl -k https://www.example.local # APP v1 (default traffic)
+curl -k -H "group: beta-test-users" https://www.example.local # APP v2 (header match rule traffic)
+```
+
 ## Blue/Green Deploy Strategy
 
 The [app-blue-green-http-route.yml](./app-blue-green-http-route.yml) has the rules for Blue/Green deploy strategy. The rule is based on host and when users access the `https://app.blue.example.local` URL, the traffic is routed to `app-v1-service` and when users access the `https://app.green.example.local` URL, the traffic is routed to `app-v2-service`.

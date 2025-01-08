@@ -9,15 +9,37 @@
 
 - [x] INGRESS CONTROLLER
 
-  - [x] Configurar ingress
-  - [x] Configurar https no ingress
-  - [x] Configurar Ingress para fazer redirect do HTTP para o HTTPS
-    - O redirect é feito automaticamente
+  - [x] NGINX INGRESS CONTROLLER
 
-- [ ] GATEWAY API
+    - [x] Configurar NGINX Ingress Controller
+    - [x] Configurar https no ingress
+    - [x] Configurar Ingress para fazer redirect do HTTP para o HTTPS
+      - O redirect é feito automaticamente
+
+  - [ ] ISTIO INGRESS CONTROLLER
+    - [ ] Instalar o ISTIO Ingress Controller
+    - [ ] Configurar https no ingress
+    - [ ] Configurar Ingress para fazer redirect do HTTP para o HTTPS
+    - [ ] Configurar Ingress para estratégia de deploy Canário
+    - [ ] Configurar Ingress para estratégia de deploy Blue/Green
+    - [ ] Configurar Ingress para estratégia de deploy A/B Test
+
+- [x] GATEWAY API
+
   - [x] NGINX GATEWAY API
+
     - [x] Instalar NGINX Gateway API
     - [x] Configurar o Gateway
     - [x] Configurar os HTTPRoutes para as applicações v1 e v2
-    - [x] Configurei o TLS para tráfegos HTTPs no Gateway e HttpRoutes
+    - [x] Configurar o TLS para tráfegos HTTPs no Gateway e HttpRoutes
     - [x] Configurar HTTPRoutes para fazer redirect do HTTP para o HTTPS
+
+  - [x] ISTIO GATEWAY API
+    - [x] Instalar o ISTIO Gateway API
+    - [x] Configurar o Gateway
+    - [x] Configurar os HTTPRoutes para as applicações v1 e v2
+    - [x] Configurar o TLS para tráfegos HTTPs no Gateway e HttpRoutes
+    - [x] Configurar HTTPRoutes para fazer redirect do HTTP para o HTTPS
+    - [x] Configurar HttpRoutes para estratégia de deploy Canário
+    - [x] Configurar HttpRoutes para estratégia de deploy Blue/Green
+    - [x] Configurar HttpRoutes para estratégia de deploy A/B Test

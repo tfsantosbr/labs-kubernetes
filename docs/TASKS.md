@@ -29,7 +29,7 @@
 
   - [x] NGINX GATEWAY API
 
-    - [ ] Instalar NGINX Gateway API
+    - [x] Instalar NGINX Gateway API
     - [x] Configurar o Gateway
     - [x] Configurar os HTTPRoutes para as applicações v1 e v2
     - [x] Configurar o TLS para tráfegos HTTPs no Gateway e HttpRoutes

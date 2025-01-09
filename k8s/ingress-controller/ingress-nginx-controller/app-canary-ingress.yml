@@ -27,7 +27,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/canary: "true"
-    nginx.ingress.kubernetes.io/canary-weight: "50" # 50% do tráfego para o app-v2
+    nginx.ingress.kubernetes.io/canary-weight: "80" # 80% do tráfego para o app-v2
 spec:
   ingressClassName: nginx
   rules:

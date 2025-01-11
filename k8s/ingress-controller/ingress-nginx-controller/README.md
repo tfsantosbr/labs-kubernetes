@@ -46,4 +46,6 @@ kubectl delete -f k8s/ingress-controller/ingress-nginx-controller
 
 ## Uninstall NGINX Ingress Controller
 
-Follow this [Uninstallation Guide](https://docs.nginx.com/ingress-nginx-controller/installation/installing-nic/installation-with-manifests/#uninstall-ingress-nginx-controller) to uninstall NGINX Ingress Controller
+```bash
+kubectl delete -f <<SAME_MANIFEST_URL_TO_INSTALL>>
+```

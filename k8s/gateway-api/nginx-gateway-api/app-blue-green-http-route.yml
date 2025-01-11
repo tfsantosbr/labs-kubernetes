@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-blue-http-route
+  namespace: nginx-gateway-api-ns
+spec:
+  parentRefs:
+    - name: app-gateway
+      sectionName: https
+  hostnames:
+    - app.blue.example.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: app-v1-service
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-green-http-route
+  namespace: nginx-gateway-api-ns
+spec:
+  parentRefs:
+    - name: app-gateway
+      sectionName: https
+  hostnames:
+    - app.green.example.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: app-v2-service
+          port: 80

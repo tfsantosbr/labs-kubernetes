@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-v1-blue-ingress
+  namespace: ingress-nginx-controller-ns
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app.blue.example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-v1-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - app.blue.example.local
+      secretName: certificate-secret
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-v2-green-ingress
+  namespace: ingress-nginx-controller-ns
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app.green.example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-v2-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - app.green.example.local
+      secretName: certificate-secret

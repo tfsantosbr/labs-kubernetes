@@ -13,9 +13,6 @@
 
     - [x] Instalar o NGINX Ingress Controller
     - [x] Configurar TLS (com redirect de HTTP para HTTPS)
-    - [ ] Configurar Ingress para estratégia de deploy Canário
-    - [ ] Configurar Ingress para estratégia de deploy Blue/Green
-    - [ ] Configurar Ingress para estratégia de deploy A/B Test
 
   - [x] ISTIO INGRESS CONTROLLER
 
